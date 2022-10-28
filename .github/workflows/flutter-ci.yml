@@ -1,0 +1,28 @@
+name: Flutter CI
+
+# This workflow is triggered on pushes to the repository
+
+on: push
+
+jobs:
+    build:
+    # Select the OS to run the job
+        runs-on: ubuntu-latest
+        steps:
+
+        - uses: actions/checkout@v3
+        - uses: actions/setup-java@v2
+          with:
+            distribution: 'zulu'
+            java-version: '11'
+        - uses: subosito/flutter-action@v2
+          with:
+            flutter-version: '3.3.6'
+        - run: flutter pub get
+        - run: flutter test
+        - run: flutter build apk
+        
+        - uses: actions/upload-artifact@v3
+          with:
+            name: release-apk
+            path: build/app/outputs/apk/release/app-release.apk
