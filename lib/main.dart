@@ -3,16 +3,18 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
 
-// put this somewhere:
-/*
-await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-);
-
-*/
-
 void main() {
+
   runApp(const MyApp());
+}
+
+
+Future<FirebaseApp> _initializeFirebase() async {
+
+    FirebaseApp firebaseApp = await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+    return firebaseApp;
 }
 
 class MyApp extends StatelessWidget {
