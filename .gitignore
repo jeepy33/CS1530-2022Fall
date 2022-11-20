@@ -1,3 +1,14 @@
+.dart_tool/
+..idea/
+.android/
+.build/
+.ios/
+.linux/
+.macros/
+.test/
+.web/
+.windows/
+.metadata
 .dart_tool/package_config.json
 .dart_tool/version
 .dart_tool/package_config_subset
