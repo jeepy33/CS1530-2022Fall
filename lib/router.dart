@@ -10,6 +10,10 @@ class Router {
         return MaterialPageRoute(builder: (_) => HomePage());
       case filterRoute:
         return MaterialPageRoute(builder: (_) => FilterPage());
+      case roll1Route:
+        return MaterialPageRoute(builder: (_) => Roll1Page());
+      case roll2Route:
+        return MaterialPageRoute(builder: (_) => Roll2Page());
       default:
         return MaterialPageRoute(
             builder: (_) => Scaffold(
