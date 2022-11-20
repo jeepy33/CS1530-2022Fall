@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'list.dart';
 
 class FilterPage extends StatefulWidget {
   // This widget is the home page of your application. It is stateful, meaning
@@ -22,8 +23,6 @@ class _FilterPageState extends State<FilterPage> {
   bool pizza = false;
   bool mex = false;
   bool chinese = false;
-  List<String> _options = ['Flutter', 'Dart', 'Woolha'];
-  List<bool> _selected = [false, false, false];
 
   @override
   Widget build(BuildContext context) {
@@ -44,8 +43,13 @@ class _FilterPageState extends State<FilterPage> {
               child: const Text('Home'),
             ),
             //Slider Widget
+            Text('Distance',
+                selectionColor: Colors.grey, textAlign: TextAlign.left),
             Slider(
               value: distance,
+              activeColor: Color.fromARGB(255, 119, 195, 91),
+              inactiveColor: Colors.grey,
+              thumbColor: Color.fromARGB(255, 119, 195, 91),
               label: '${distance.round()} Distanmce (miles)',
               onChanged: (newDistance) {
                 setState(() {
@@ -57,8 +61,13 @@ class _FilterPageState extends State<FilterPage> {
               divisions: 6,
               //label: "Distance (miles)"
             ),
+            Text('Price',
+                selectionColor: Colors.grey, textAlign: TextAlign.left),
             Slider(
               value: price,
+              activeColor: Color.fromARGB(255, 119, 195, 91),
+              inactiveColor: Colors.grey,
+              thumbColor: Color.fromARGB(255, 119, 195, 91),
               label: '${price.round()} Avg Price (per plate)',
               onChanged: (newPrice) {
                 setState(() {
@@ -70,30 +79,20 @@ class _FilterPageState extends State<FilterPage> {
               divisions: 10,
               // label: "Avg Price (per plate)"
             ),
-            FilterChip(
-                label: Text('Pizza'),
-                selected: pizza,
-                onSelected: (bool newValue) {
-                  setState(() {
-                    pizza = newValue;
-                  });
-                }),
-            FilterChip(
-                label: Text('Mexican'),
-                selected: mex,
-                onSelected: (bool newValue) {
-                  setState(() {
-                    mex = newValue;
-                  });
-                }),
-            FilterChip(
-                label: Text('Chinese'),
-                selected: chinese,
-                onSelected: (bool newValue) {
-                  setState(() {
-                    chinese = newValue;
-                  });
-                }),
+            // const Divider(
+            //   height: 20,
+            //   thickness: 5,
+            //   color: Colors.black,
+            // ),
+            Text('Style', selectionColor: Colors.grey),
+            InputChipExample(),
+            const Divider(
+              height: 20,
+              thickness: 5,
+              color: Color.fromARGB(255, 119, 195, 91),
+            ),
+            Text('Diet', selectionColor: Colors.grey),
+            InputChipExample2(),
           ],
         ),
       ),
