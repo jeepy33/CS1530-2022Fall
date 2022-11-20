@@ -87,6 +87,9 @@ class FilterPage extends StatefulWidget {
 }
 
 class _FilterPageState extends State<FilterPage> {
+  double distance = 0;
+  double price = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -104,6 +107,29 @@ class _FilterPageState extends State<FilterPage> {
               },
               child: const Text('Home'),
             ),
+            //Slider Widget
+            Slider(
+                value: distance,
+                onChanged: (newDistance) {
+                  setState(() {
+                    distance = newDistance;
+                  });
+                },
+                min: 0,
+                max: 60,
+                divisions: 6,
+                label: "Distance (miles)"),
+            Slider(
+                value: price,
+                onChanged: (newPrice) {
+                  setState(() {
+                    price = newPrice;
+                  });
+                },
+                min: 0,
+                max: 100,
+                divisions: 10,
+                label: "Avg Price (per plate)"),
           ],
         ),
       ),
