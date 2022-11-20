@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
-
+import 'package:carousel_slider/carousel_slider.dart';
 import 'router.dart' as LocalRouter;
 import 'constants.dart';
 
@@ -109,27 +109,65 @@ class _FilterPageState extends State<FilterPage> {
             ),
             //Slider Widget
             Slider(
-                value: distance,
-                onChanged: (newDistance) {
-                  setState(() {
-                    distance = newDistance;
-                  });
-                },
-                min: 0,
-                max: 60,
-                divisions: 6,
-                label: "Distance (miles)"),
+              value: distance,
+              label: '${distance.round()} Distanmce (miles)',
+              onChanged: (newDistance) {
+                setState(() {
+                  distance = newDistance;
+                });
+              },
+              min: 0,
+              max: 60,
+              divisions: 6,
+              //label: "Distance (miles)"
+            ),
             Slider(
-                value: price,
-                onChanged: (newPrice) {
-                  setState(() {
-                    price = newPrice;
-                  });
-                },
-                min: 0,
-                max: 100,
-                divisions: 10,
-                label: "Avg Price (per plate)"),
+              value: price,
+              label: '${price.round()} Avg Price (per plate)',
+              onChanged: (newPrice) {
+                setState(() {
+                  price = newPrice;
+                });
+              },
+              min: 0,
+              max: 100,
+              divisions: 10,
+              // label: "Avg Price (per plate)"
+            ),
+            CarouselSlider(
+              options: CarouselOptions(height: 400.0),
+              items: [1, 2, 3, 4, 5].map((i) {
+                return Builder(
+                  builder: (BuildContext context) {
+                    return Container(
+                        width: MediaQuery.of(context).size.width,
+                        margin: EdgeInsets.symmetric(horizontal: 5.0),
+                        decoration: BoxDecoration(color: Colors.green),
+                        child: Text(
+                          'text $i',
+                          style: TextStyle(fontSize: 16.0),
+                        ));
+                  },
+                );
+              }).toList(),
+            ),
+            CarouselSlider(
+              options: CarouselOptions(height: 400.0),
+              items: [1, 2, 3, 4, 5].map((i) {
+                return Builder(
+                  builder: (BuildContext context) {
+                    return Container(
+                        width: MediaQuery.of(context).size.width,
+                        margin: EdgeInsets.symmetric(horizontal: 5.0),
+                        decoration: BoxDecoration(color: Colors.green),
+                        child: Text(
+                          'text $i',
+                          style: TextStyle(fontSize: 16.0),
+                        ));
+                  },
+                );
+              }).toList(),
+            )
           ],
         ),
       ),
