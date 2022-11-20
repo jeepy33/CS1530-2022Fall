@@ -4,9 +4,11 @@ import 'package:iconly/iconly.dart';
 import 'dart:math';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
-
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:filter_list/filter_list.dart';
 import 'router.dart' as LocalRouter;
 import 'constants.dart';
+import 'list.dart';
 
 void main() {
   runApp(const MyApp());
@@ -350,9 +352,17 @@ class FilterPage extends StatefulWidget {
 class _FilterPageState extends State<FilterPage> {
   double distance = 0;
   double price = 0;
+  String filter = '';
+  //final bool selected;
+  bool pizza = false;
+  bool mex = false;
+  bool chinese = false;
+  List<String> _options = ['Flutter', 'Dart', 'Woolha'];
+  List<bool> _selected = [false, false, false];
 
   @override
   Widget build(BuildContext context) {
+    //var filter;
     return Scaffold(
       body: Center(
         child: Column(
@@ -370,27 +380,55 @@ class _FilterPageState extends State<FilterPage> {
             ),
             //Slider Widget
             Slider(
-                value: distance,
-                onChanged: (newDistance) {
-                  setState(() {
-                    distance = newDistance;
-                  });
-                },
-                min: 0,
-                max: 60,
-                divisions: 6,
-                label: "Distance (miles)"),
+              value: distance,
+              label: '${distance.round()} Distanmce (miles)',
+              onChanged: (newDistance) {
+                setState(() {
+                  distance = newDistance;
+                });
+              },
+              min: 0,
+              max: 60,
+              divisions: 6,
+              //label: "Distance (miles)"
+            ),
             Slider(
-                value: price,
-                onChanged: (newPrice) {
+              value: price,
+              label: '${price.round()} Avg Price (per plate)',
+              onChanged: (newPrice) {
+                setState(() {
+                  price = newPrice;
+                });
+              },
+              min: 0,
+              max: 100,
+              divisions: 10,
+              // label: "Avg Price (per plate)"
+            ),
+            FilterChip(
+                label: Text('Pizza'),
+                selected: pizza,
+                onSelected: (bool newValue) {
                   setState(() {
-                    price = newPrice;
+                    pizza = newValue;
                   });
-                },
-                min: 0,
-                max: 100,
-                divisions: 10,
-                label: "Avg Price (per plate)"),
+                }),
+            FilterChip(
+                label: Text('Mexican'),
+                selected: mex,
+                onSelected: (bool newValue) {
+                  setState(() {
+                    mex = newValue;
+                  });
+                }),
+            FilterChip(
+                label: Text('Chinese'),
+                selected: chinese,
+                onSelected: (bool newValue) {
+                  setState(() {
+                    chinese = newValue;
+                  });
+                }),
           ],
         ),
       ),
