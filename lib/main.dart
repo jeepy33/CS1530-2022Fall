@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:filter_list/filter_list.dart';
 import 'router.dart' as LocalRouter;
 import 'constants.dart';
+import 'list.dart';
 
 void main() {
   runApp(const MyApp());
@@ -89,9 +91,17 @@ class FilterPage extends StatefulWidget {
 class _FilterPageState extends State<FilterPage> {
   double distance = 0;
   double price = 0;
+  String filter = '';
+  //final bool selected;
+  bool pizza = false;
+  bool mex = false;
+  bool chinese = false;
+  List<String> _options = ['Flutter', 'Dart', 'Woolha'];
+  List<bool> _selected = [false, false, false];
 
   @override
   Widget build(BuildContext context) {
+    //var filter;
     return Scaffold(
       body: Center(
         child: Column(
@@ -134,40 +144,30 @@ class _FilterPageState extends State<FilterPage> {
               divisions: 10,
               // label: "Avg Price (per plate)"
             ),
-            CarouselSlider(
-              options: CarouselOptions(height: 400.0),
-              items: [1, 2, 3, 4, 5].map((i) {
-                return Builder(
-                  builder: (BuildContext context) {
-                    return Container(
-                        width: MediaQuery.of(context).size.width,
-                        margin: EdgeInsets.symmetric(horizontal: 5.0),
-                        decoration: BoxDecoration(color: Colors.green),
-                        child: Text(
-                          'text $i',
-                          style: TextStyle(fontSize: 16.0),
-                        ));
-                  },
-                );
-              }).toList(),
-            ),
-            CarouselSlider(
-              options: CarouselOptions(height: 400.0),
-              items: [1, 2, 3, 4, 5].map((i) {
-                return Builder(
-                  builder: (BuildContext context) {
-                    return Container(
-                        width: MediaQuery.of(context).size.width,
-                        margin: EdgeInsets.symmetric(horizontal: 5.0),
-                        decoration: BoxDecoration(color: Colors.green),
-                        child: Text(
-                          'text $i',
-                          style: TextStyle(fontSize: 16.0),
-                        ));
-                  },
-                );
-              }).toList(),
-            )
+            FilterChip(
+                label: Text('Pizza'),
+                selected: pizza,
+                onSelected: (bool newValue) {
+                  setState(() {
+                    pizza = newValue;
+                  });
+                }),
+            FilterChip(
+                label: Text('Mexican'),
+                selected: mex,
+                onSelected: (bool newValue) {
+                  setState(() {
+                    mex = newValue;
+                  });
+                }),
+            FilterChip(
+                label: Text('Chinese'),
+                selected: chinese,
+                onSelected: (bool newValue) {
+                  setState(() {
+                    chinese = newValue;
+                  });
+                }),
           ],
         ),
       ),
