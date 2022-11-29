@@ -44,6 +44,7 @@ dependencies:
   iconly: ^1.0.1
 
   spritewidget: ^2.0.1
+  firebase_auth: ^4.1.4
 
 
 dev_dependencies:
