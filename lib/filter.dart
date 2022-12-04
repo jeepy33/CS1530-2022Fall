@@ -101,7 +101,7 @@ class _FilterPageState extends State<FilterPage> {
             //Slider Widget
             Text('Filters',
                 style: TextStyle(
-                    fontSize: 60,
+                    fontSize: 40,
                     fontWeight: FontWeight.bold,
                     color: Colors.grey)),
             //  Icon(Icons.filter_alt),
