@@ -74,7 +74,7 @@ class _CheckInPageState extends State<CheckPage> {
         ],
         // unselectedItemColor: Colors.amber,
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber,
+        selectedItemColor: Color.fromARGB(255, 119, 195, 91),
         onTap: _onItemTapped,
       ),
 

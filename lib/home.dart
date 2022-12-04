@@ -73,7 +73,7 @@ class _HomePageState extends State<HomePage> {
         ],
         //unselectedItemColor: Colors.amber,
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber,
+        selectedItemColor: Color.fromARGB(255, 119, 195, 91),
         onTap: _onItemTapped,
       ),
 
