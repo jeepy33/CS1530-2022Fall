@@ -211,6 +211,26 @@ class _FilterPageState extends State<FilterPage> {
               thickness: 5,
               color: Color.fromARGB(255, 119, 195, 91),
             ),
+            const SizedBox(
+              height: 20, // <-- SEE HERE
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: Color.fromARGB(255, 119, 195, 91),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 96, vertical: 30),
+                  textStyle: const TextStyle(
+                      fontSize: 25, fontWeight: FontWeight.bold)),
+              onPressed: () {
+                Navigator.pushNamed(context, homeRoute,
+                    arguments: 'arguments/chose Templates');
+              },
+              child: const Text('Save Filters Request',
+                  style: TextStyle(
+                    //backgroundColor: Color.fromARGB(255, 119, 195, 91),
+                    color: Color.fromARGB(255, 255, 254, 254),
+                  )),
+            ),
           ],
         ),
       ),
