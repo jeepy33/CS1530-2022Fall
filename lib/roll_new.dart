@@ -3,7 +3,7 @@ import 'dart:math';
 
 import 'package:locate_app/animation/dice.dart';
 
-class RollFavoritePage extends StatefulWidget {
+class RollNewPage extends StatefulWidget {
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
   // how it looks.
@@ -14,10 +14,10 @@ class RollFavoritePage extends StatefulWidget {
   // always marked "final"
 
   @override
-  State<RollFavoritePage> createState() => _RollFavoritePageState();
+  State<RollNewPage> createState() => _RollNewPageState();
 }
 
-class _RollFavoritePageState extends State<RollFavoritePage>
+class _RollNewPageState extends State<RollNewPage>
     with TickerProviderStateMixin {
   int leftDiceNumber = 0;
   int rightDiceNumber = 0;
