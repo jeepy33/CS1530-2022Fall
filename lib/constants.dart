@@ -1,6 +1,7 @@
 const String homeRoute = '/home';
 const String filterRoute = '/filter';
 const String loginRoute = '/login';
+const String signInRoute = '/sign_in';
 
 const String roll1Route = '/rollNew';
 const String roll2Route = '/rollFav';

@@ -10,7 +10,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  int _selectedIndex = 0;
+  /*int _selectedIndex = 0;
   static const TextStyle optionStyle =
   TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
@@ -37,7 +37,7 @@ class _LoginPageState extends State<LoginPage> {
       _selectedIndex = index;
     });
   }
-
+*/
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,11 +60,11 @@ class _LoginPageState extends State<LoginPage> {
               style: ElevatedButton.styleFrom(
                   backgroundColor: Color.fromARGB(255, 255, 255, 255),
                   padding:
-                  const EdgeInsets.symmetric(horizontal: 96, vertical: 30),
+                  const EdgeInsets.symmetric(horizontal: 150, vertical: 30),
                   textStyle: const TextStyle(
                       fontSize: 25, fontWeight: FontWeight.bold)),
               onPressed: () {
-                Navigator.pushNamed(context, homeRoute,
+                Navigator.pushNamed(context, signInRoute,
                     arguments: 'arguments/chose Templates');
               },
               child: const Text('Sign In',
