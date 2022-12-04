@@ -110,9 +110,9 @@ class InputChipExample2 extends StatefulWidget {
 class InputChipExample2State extends State<InputChipExample2>
     with TickerProviderStateMixin {
   List<String> _options = [
-    'Vegitarian',
+    'Vegetarian ',
     'Vegan',
-    'Pescetarian',
+    'Pescatarian',
     'Gluten-Free',
     'Kosher',
     'Keto',

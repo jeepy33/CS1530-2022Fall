@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:locate_app/login.dart';
 import 'home.dart';
 import 'roll_favorite.dart';
-import 'roll_familiar.dart';
+import 'roll_new.dart';
 import 'filter.dart';
 import 'sign_in.dart';
 import 'sign_up.dart';
@@ -22,7 +22,7 @@ class Router {
       case roll1Route:
         return MaterialPageRoute(builder: (_) => RollFavoritePage());
       case roll2Route:
-        return MaterialPageRoute(builder: (_) => RollFamiliarPage());
+        return MaterialPageRoute(builder: (_) => RollNewPage());
       case signInRoute:
         return MaterialPageRoute(builder: (_) => SignInPage());
       case signUpRoute:

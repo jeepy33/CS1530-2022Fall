@@ -15,18 +15,16 @@ class _diceState extends State<Dice> {
   Random rand = new Random();
   int left = 6;
   int right = 3;
-  late NodeWithSize rootNode;
   ImageMap images = ImageMap();
+  String img = diceImageList[0];
 
   @override
-  void initState() {
-    super.initState();
-    rootNode = NodeWithSize(const Size(1024.0, 1024.0));
-    images.load(diceImageList);
-  }
+  void initState() {}
 
   @override
   Widget build(BuildContext context) {
-    return SpriteWidget(rootNode);
+    return Column(children: <Widget>[
+      Image.asset(img),
+    ]);
   }
 }
