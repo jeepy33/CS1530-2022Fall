@@ -11,31 +11,33 @@ class BarPage extends StatefulWidget {
 
 class _BarPageState extends State<BarPage> {
   int _selectedIndex = 0; //New
+  // static const List<Widget> _pages = <Widget>[
+  //  @override
+  // State<RollFavoritePage> createState() => _BarPageState();
+  // @override
+
   static const List<Widget> _pages = <Widget>[
-   @override
-   State<RollFavoritePage> createState() => _RollFavoritePageState();
-  @override
-   Widget build(BuildContext context) 
-   {
-    homePage();
-   },
- 
-   @override
-   Widget build(BuildContext context) 
-   {
-    FilterPage();
-   },
-    
-    // Icon(
-      
-    // //  size: 150,
-    // ),
+    Text(
+      'Index 0: Home',
+    ),
+    Text(
+      'Index 1: CheckIn',
+      // style: optionStyle,
+    ),
+    Text(
+      'Index 2: Filters',
+      // style: optionStyle,
+    ),
   ];
 
   void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+    if (index == 2) {
+      Navigator.pushNamed(context, filterRoute,
+          arguments: 'arguments/chose Templates');
+    } else if (index == 0) {
+      Navigator.pushNamed(context, homeRoute,
+          arguments: 'arguments/chose Templates');
+    }
   }
 
   @override
@@ -50,7 +52,7 @@ class _BarPageState extends State<BarPage> {
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
-           //_pages: 
+            //_pages:
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.search),
