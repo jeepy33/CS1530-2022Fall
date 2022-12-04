@@ -10,8 +10,56 @@ class InputChipExample extends StatefulWidget {
 
 class InputChipExampleState extends State<InputChipExample>
     with TickerProviderStateMixin {
-  List<String> _options = ['Pizza', 'Mexican', 'Chinese'];
-  List<bool> _selected = [false, false, false];
+  List<String> _options = [
+    'Breakfast',
+    'Bakery',
+    'Asian',
+    'Tacos',
+    'Wings',
+    'Ice Cream',
+    'Mexican',
+    'Seafood',
+    'Pasta',
+    'Sushi',
+    'Mediterranean',
+    'Deli',
+    'Snacks',
+    'Candy',
+    'Subs',
+    'Noodle',
+    'BBQ',
+    'Italian',
+    'Cafe',
+    'Grill',
+    'Burgers',
+    'Desert',
+    'Salad'
+  ];
+  List<bool> _selected = [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+  ];
 
   Widget _buildChips() {
     List<Widget> chips = [];
@@ -61,8 +109,28 @@ class InputChipExample2 extends StatefulWidget {
 
 class InputChipExample2State extends State<InputChipExample2>
     with TickerProviderStateMixin {
-  List<String> _options = ['Vegitarian', 'Vegan', 'Gressy'];
-  List<bool> _selected = [false, false, false];
+  List<String> _options = [
+    'Vegitarian',
+    'Vegan',
+    'Pescetarian',
+    'Gluten-Free',
+    'Kosher',
+    'Keto',
+    'Dairy-Free',
+    'Low-Carb',
+    'Paleo'
+  ];
+  List<bool> _selected = [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+  ];
 
   Widget _buildChips() {
     List<Widget> chips = [];
