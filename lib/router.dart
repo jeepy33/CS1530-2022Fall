@@ -5,6 +5,7 @@ import 'roll_favorite.dart';
 import 'roll_familiar.dart';
 import 'filter.dart';
 import 'sign_in.dart';
+import 'sign_up.dart';
 import 'CheckIn.dart';
 
 import 'constants.dart';
@@ -24,6 +25,8 @@ class Router {
         return MaterialPageRoute(builder: (_) => RollFamiliarPage());
       case signInRoute:
         return MaterialPageRoute(builder: (_) => SignInPage());
+      case signUpRoute:
+        return MaterialPageRoute(builder: (_) => SignUpPage());
       case checkInRoute:
         return MaterialPageRoute(builder: (_) => CheckPage());
       default:
