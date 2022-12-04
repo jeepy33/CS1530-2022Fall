@@ -43,8 +43,13 @@ class _FilterPageState extends State<FilterPage> {
               child: const Text('Home'),
             ),
             //Slider Widget
-            Text('Distance',
-                selectionColor: Colors.grey, textAlign: TextAlign.left),
+            Text(
+              'Distance',
+              style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.grey),
+            ),
             Slider(
               value: distance,
               activeColor: Color.fromARGB(255, 119, 195, 91),
@@ -61,8 +66,13 @@ class _FilterPageState extends State<FilterPage> {
               divisions: 6,
               //label: "Distance (miles)"
             ),
-            Text('Price',
-                selectionColor: Colors.grey, textAlign: TextAlign.left),
+            Text(
+              'Price',
+              style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.grey),
+            ),
             Slider(
               value: price,
               activeColor: Color.fromARGB(255, 119, 195, 91),
@@ -84,14 +94,26 @@ class _FilterPageState extends State<FilterPage> {
             //   thickness: 5,
             //   color: Colors.black,
             // ),
-            Text('Style', selectionColor: Colors.grey),
+            Text(
+              'Style',
+              style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.grey),
+            ),
             InputChipExample(),
             const Divider(
               height: 20,
               thickness: 5,
               color: Color.fromARGB(255, 119, 195, 91),
             ),
-            Text('Diet', selectionColor: Colors.grey),
+            Text(
+              'Diet',
+              style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.grey),
+            ),
             InputChipExample2(),
           ],
         ),

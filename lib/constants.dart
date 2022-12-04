@@ -6,6 +6,7 @@ const String signUpRoute = '/sign_up';
 
 const String roll1Route = '/rollNew';
 const String roll2Route = '/rollFav';
+const String checkInRoute = '/checkInRoute';
 
 const int green = 0x86c66f;
 const int grey = 0x8d948b;
@@ -18,4 +19,3 @@ const List<String> diceImageList = [
   'assets/dice_5.png',
   'assets/dice_6.png',
 ];
-
