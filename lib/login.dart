@@ -83,7 +83,7 @@ class _LoginPageState extends State<LoginPage> {
                   textStyle: const TextStyle(
                       fontSize: 25, fontWeight: FontWeight.bold)),
               onPressed: () {
-                Navigator.pushNamed(context, homeRoute,
+                Navigator.pushNamed(context, signUpRoute,
                     arguments: 'arguments/chose Templates');
               },
               child: const Text('Sign Up',
