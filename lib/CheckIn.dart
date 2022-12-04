@@ -38,9 +38,13 @@ class _CheckInPageState extends State<CheckPage> {
     if (index == 2) {
       Navigator.pushNamed(context, filterRoute,
           arguments: 'arguments/chose Templates');
-    } else if (index == 0) {
-      Navigator.pushNamed(context, homeRoute,
-          arguments: 'arguments/chose Templates');
+      if (index == 1) {
+        Navigator.pushNamed(context, checkInRoute,
+            arguments: 'arguments/chose Templates');
+      } else if (index == 0) {
+        Navigator.pushNamed(context, homeRoute,
+            arguments: 'arguments/chose Templates');
+      }
     }
   }
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'list.dart';
+import 'constants.dart';
 
 class FilterPage extends StatefulWidget {
   // This widget is the home page of your application. It is stateful, meaning
@@ -16,6 +17,37 @@ class FilterPage extends StatefulWidget {
 }
 
 class _FilterPageState extends State<FilterPage> {
+  int _selectedIndex = 0;
+  static const TextStyle optionStyle =
+      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  static const List<Widget> _pages = <Widget>[
+    Text(
+      'Index 0: Home',
+      style: optionStyle,
+    ),
+    Text(
+      'Index 1: CheckIn',
+      style: optionStyle,
+    ),
+    Text(
+      'Index 2: Filters',
+      style: optionStyle,
+    ),
+  ];
+
+  void _onItemTapped(int index) {
+    if (index == 2) {
+      Navigator.pushNamed(context, filterRoute,
+          arguments: 'arguments/chose Templates');
+    } else if (index == 1) {
+      Navigator.pushNamed(context, checkInRoute,
+          arguments: 'arguments/chose Templates');
+    } else if (index == 0) {
+      Navigator.pushNamed(context, homeRoute,
+          arguments: 'arguments/chose Templates');
+    }
+  }
+
   double distance = 0;
   double price = 0;
   String filter = '';
@@ -28,21 +60,50 @@ class _FilterPageState extends State<FilterPage> {
   Widget build(BuildContext context) {
     //var filter;
     return Scaffold(
+      backgroundColor:
+          Color.fromARGB(255, 255, 255, 255), //0x86c66f // gray 0x8d948b
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+            //_pages:
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search),
+            label: 'Check In',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.filter),
+            label: 'Filters',
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.amber[800],
+        onTap: _onItemTapped,
+      ),
+
+      appBar: AppBar(
+        backgroundColor: Color.fromARGB(255, 119, 174, 98),
+        automaticallyImplyLeading: false,
+        title: const Text('LocAte'),
+      ),
+
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            TextButton(
-              style: TextButton.styleFrom(
-                textStyle: const TextStyle(fontSize: 20),
-              ),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: const Text('Home'),
-            ),
             //Slider Widget
+            Text('Filters',
+                style: TextStyle(
+                    fontSize: 60,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.grey)),
+            //  Icon(Icons.filter_alt),
+            const SizedBox(
+              height: 50, // <-- SEE
+            ),
             Text(
               'Distance',
               style: TextStyle(
@@ -65,6 +126,9 @@ class _FilterPageState extends State<FilterPage> {
               max: 60,
               divisions: 6,
               //label: "Distance (miles)"
+            ),
+            const SizedBox(
+              height: 50, // <-- SEE HERE
             ),
             Text(
               'Price',
@@ -94,6 +158,14 @@ class _FilterPageState extends State<FilterPage> {
             //   thickness: 5,
             //   color: Colors.black,
             // ),
+            const SizedBox(
+              height: 50, // <-- SEE HERE
+            ),
+            const Divider(
+              height: 20,
+              thickness: 5,
+              color: Color.fromARGB(255, 119, 195, 91),
+            ),
             Text(
               'Style',
               style: TextStyle(
@@ -102,11 +174,30 @@ class _FilterPageState extends State<FilterPage> {
                   color: Colors.grey),
             ),
             InputChipExample(),
+            // const Divider(
+            //   height: 20,
+            //   thickness: 5,
+            //   color: Color.fromARGB(255, 119, 195, 91),
+            // ),
+            const SizedBox(
+              height: 25, // <-- SEE HERE
+            ),
             const Divider(
               height: 20,
               thickness: 5,
               color: Color.fromARGB(255, 119, 195, 91),
             ),
+            const SizedBox(
+              height: 25, // <-- SEE HERE
+            ),
+            // const Divider(
+            //   height: 20,
+            //   thickness: 20,
+            //   color: Color.fromARGB(255, 119, 195, 91),
+            // ),
+            // const SizedBox(
+            //   height: 30, // <-- SEE HERE
+            // ),
             Text(
               'Diet',
               style: TextStyle(
@@ -115,6 +206,11 @@ class _FilterPageState extends State<FilterPage> {
                   color: Colors.grey),
             ),
             InputChipExample2(),
+            const Divider(
+              height: 20,
+              thickness: 5,
+              color: Color.fromARGB(255, 119, 195, 91),
+            ),
           ],
         ),
       ),
