@@ -25,12 +25,11 @@ class _SignInPageState extends State<SignInPage> {
   Future<FirebaseApp> _initializeFirebase() async {
     FirebaseOptions firebaseConfig = DefaultFirebaseOptions.currentPlatform;
     FirebaseApp firebaseApp = await Firebase.initializeApp(options: firebaseConfig);
-    firebaseApp.options;
     User? user = FirebaseAuth.instance.currentUser;
 
     if (user != null && mounted) {
-      Navigator.pushNamed(context, homeRoute,
-          arguments: 'arguments/chose Templates');
+      //Navigator.pushNamed(context, homeRoute,
+          //arguments: 'arguments/chose Templates');
     }
 
     return firebaseApp;
@@ -38,28 +37,6 @@ class _SignInPageState extends State<SignInPage> {
 
   @override
   Widget build(BuildContext context) {
-    /*return Scaffold(
-      appBar: AppBar(
-        title: Text('Firebase Authentication'),
-      ),
-      body: FutureBuilder(
-        future: _initializeFirebase(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            return Column(
-              children: const [
-                Text('Login'),
-              ],
-            );
-          }
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        },
-      ),
-    );*/
-
-
     return GestureDetector(
       onTap: () {
         _focusEmail.unfocus();
@@ -161,19 +138,6 @@ class _SignInPageState extends State<SignInPage> {
                                   },
                                   child: Text(
                                     'Sign In',
-                                    style: TextStyle(color: Colors.white),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(width: 24.0),
-                              Expanded(
-                                child: ElevatedButton(
-                                  onPressed: () {
-                                    Navigator.pushNamed(context, homeRoute,
-                                        arguments: 'arguments/chose Templates');
-                                  },
-                                  child: Text(
-                                    'Register',
                                     style: TextStyle(color: Colors.white),
                                   ),
                                 ),
