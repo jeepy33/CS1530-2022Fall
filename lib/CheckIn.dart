@@ -16,7 +16,7 @@ class CheckPage extends StatefulWidget {
 }
 
 class _CheckInPageState extends State<CheckPage> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 1;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _pages = <Widget>[
@@ -36,12 +36,15 @@ class _CheckInPageState extends State<CheckPage> {
 
   void _onItemTapped(int index) {
     if (index == 2) {
+      _selectedIndex = 2;
       Navigator.pushNamed(context, filterRoute,
           arguments: 'arguments/chose Templates');
       if (index == 1) {
+        _selectedIndex = 1;
         Navigator.pushNamed(context, checkInRoute,
             arguments: 'arguments/chose Templates');
       } else if (index == 0) {
+        _selectedIndex = 0;
         Navigator.pushNamed(context, homeRoute,
             arguments: 'arguments/chose Templates');
       }
@@ -65,12 +68,13 @@ class _CheckInPageState extends State<CheckPage> {
             label: 'Check In',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.filter),
+            icon: Icon(Icons.filter_alt),
             label: 'Filters',
           ),
         ],
+        // unselectedItemColor: Colors.amber,
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[800],
+        selectedItemColor: Colors.amber,
         onTap: _onItemTapped,
       ),
 
