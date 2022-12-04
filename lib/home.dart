@@ -18,42 +18,67 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
-  TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static const List<Widget> _widgetOptions = <Widget>[
+      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  static const List<Widget> _pages = <Widget>[
     Text(
       'Index 0: Home',
       style: optionStyle,
     ),
     Text(
-      'Index 1: Business',
+      'Index 1: CheckIn',
       style: optionStyle,
     ),
     Text(
-      'Index 2: School',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 3: Settings',
+      'Index 2: Filters',
       style: optionStyle,
     ),
   ];
 
   void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+    if (index == 2) {
+      Navigator.pushNamed(context, filterRoute,
+          arguments: 'arguments/chose Templates');
+    } else if (index == 1) {
+      Navigator.pushNamed(context, checkInRoute,
+          arguments: 'arguments/chose Templates');
+    } else if (index == 0) {
+      Navigator.pushNamed(context, homeRoute,
+          arguments: 'arguments/chose Templates');
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor:
-      Color.fromARGB(255, 119, 195, 91), //0x86c66f // gray 0x8d948b
+          Color.fromARGB(255, 119, 195, 91), //0x86c66f // gray 0x8d948b
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+            //_pages:
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search),
+            label: 'Check In',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.filter),
+            label: 'Filters',
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.amber[800],
+        onTap: _onItemTapped,
+      ),
+
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 119, 174, 98),
         automaticallyImplyLeading: false,
         title: const Text('LocAte'),
       ),
+
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -66,7 +91,7 @@ class _HomePageState extends State<HomePage> {
               style: ElevatedButton.styleFrom(
                   backgroundColor: Color.fromARGB(255, 255, 255, 255),
                   padding:
-                  const EdgeInsets.symmetric(horizontal: 77, vertical: 30),
+                      const EdgeInsets.symmetric(horizontal: 77, vertical: 30),
                   textStyle: const TextStyle(
                       color: Colors.grey,
                       fontSize: 25,
@@ -87,7 +112,7 @@ class _HomePageState extends State<HomePage> {
               style: ElevatedButton.styleFrom(
                   backgroundColor: Color.fromARGB(255, 255, 255, 255),
                   padding:
-                  const EdgeInsets.symmetric(horizontal: 96, vertical: 30),
+                      const EdgeInsets.symmetric(horizontal: 96, vertical: 30),
                   textStyle: const TextStyle(
                       fontSize: 25, fontWeight: FontWeight.bold)),
               onPressed: () {
@@ -106,7 +131,7 @@ class _HomePageState extends State<HomePage> {
               style: ElevatedButton.styleFrom(
                   backgroundColor: Color.fromARGB(255, 255, 255, 255),
                   padding:
-                  const EdgeInsets.symmetric(horizontal: 150, vertical: 30),
+                      const EdgeInsets.symmetric(horizontal: 150, vertical: 30),
                   textStyle: const TextStyle(
                       fontSize: 25, fontWeight: FontWeight.bold)),
               onPressed: () {
