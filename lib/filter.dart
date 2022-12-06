@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'list.dart';
 import 'constants.dart';
+import 'main.dart';
 
 class FilterPage extends StatefulWidget {
   // This widget is the home page of your application. It is stateful, meaning
@@ -51,8 +52,6 @@ class _FilterPageState extends State<FilterPage> {
     }
   }
 
-  double distance = 0;
-  double price = 0;
   String filter = '';
   //final bool selected;
   bool pizza = false;
@@ -90,7 +89,7 @@ class _FilterPageState extends State<FilterPage> {
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 119, 174, 98),
         automaticallyImplyLeading: false,
-        title: const Text('LocAte'),
+        title: new Image.asset("assets/images/Logo.png"),
       ),
 
       body: Center(
@@ -116,14 +115,14 @@ class _FilterPageState extends State<FilterPage> {
                   color: Colors.grey),
             ),
             Slider(
-              value: distance,
+              value: global.distance,
               activeColor: Color.fromARGB(255, 119, 195, 91),
               inactiveColor: Colors.grey,
               thumbColor: Color.fromARGB(255, 119, 195, 91),
-              label: '${distance.round()} Distanmce (miles)',
+              label: '${global.distance.round()} Distance (miles)',
               onChanged: (newDistance) {
                 setState(() {
-                  distance = newDistance;
+                  global.distance = newDistance;
                 });
               },
               min: 0,
@@ -142,14 +141,14 @@ class _FilterPageState extends State<FilterPage> {
                   color: Colors.grey),
             ),
             Slider(
-              value: price,
+              value: global.price,
               activeColor: Color.fromARGB(255, 119, 195, 91),
               inactiveColor: Colors.grey,
               thumbColor: Color.fromARGB(255, 119, 195, 91),
-              label: '${price.round()} Avg Price (per plate)',
+              label: '${global.price.round()} Avg Price (per plate)',
               onChanged: (newPrice) {
                 setState(() {
-                  price = newPrice;
+                  global.price = newPrice;
                 });
               },
               min: 0,
@@ -217,23 +216,6 @@ class _FilterPageState extends State<FilterPage> {
             ),
             const SizedBox(
               height: 20, // <-- SEE HERE
-            ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  backgroundColor: Color.fromARGB(255, 119, 195, 91),
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 45, vertical: 20),
-                  textStyle: const TextStyle(
-                      fontSize: 25, fontWeight: FontWeight.bold)),
-              onPressed: () {
-                Navigator.pushNamed(context, homeRoute,
-                    arguments: 'arguments/chose Templates');
-              },
-              child: const Text('Save Filters Request',
-                  style: TextStyle(
-                    //backgroundColor: Color.fromARGB(255, 119, 195, 91),
-                    color: Color.fromARGB(255, 255, 254, 254),
-                  )),
             ),
           ],
         ),

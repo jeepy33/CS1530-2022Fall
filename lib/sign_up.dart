@@ -146,8 +146,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                                   .validate()) {
                                                 User? user = await FireAuth
                                                     .registerUsingEmailPassword(
-                                                  name:
-                                                      "",
+                                                  name: "",
                                                   email:
                                                       _emailTextController.text,
                                                   password:
