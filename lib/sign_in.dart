@@ -130,7 +130,7 @@ class _SignInPageState extends State<SignInPage> {
                                             backgroundColor: Color.fromARGB(
                                                 255, 255, 255, 255),
                                             padding: const EdgeInsets.symmetric(
-                                                horizontal: 150, vertical: 30),
+                                                horizontal: 120, vertical: 30),
                                             textStyle: const TextStyle(
                                                 fontSize: 25,
                                                 fontWeight: FontWeight.bold)),

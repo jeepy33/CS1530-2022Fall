@@ -10,34 +10,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  /*int _selectedIndex = 0;
-  static const TextStyle optionStyle =
-  TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Index 0: Home',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 1: Business',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 2: School',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 3: Settings',
-      style: optionStyle,
-    ),
-  ];
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-*/
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,7 +32,7 @@ class _LoginPageState extends State<LoginPage> {
               style: ElevatedButton.styleFrom(
                   backgroundColor: Color.fromARGB(255, 255, 255, 255),
                   padding:
-                  const EdgeInsets.symmetric(horizontal: 150, vertical: 30),
+                  const EdgeInsets.symmetric(horizontal: 120, vertical: 30),
                   textStyle: const TextStyle(
                       fontSize: 25, fontWeight: FontWeight.bold)),
               onPressed: () {
@@ -79,7 +51,7 @@ class _LoginPageState extends State<LoginPage> {
               style: ElevatedButton.styleFrom(
                   backgroundColor: Color.fromARGB(255, 255, 255, 255),
                   padding:
-                  const EdgeInsets.symmetric(horizontal: 150, vertical: 30),
+                  const EdgeInsets.symmetric(horizontal: 115, vertical: 30),
                   textStyle: const TextStyle(
                       fontSize: 25, fontWeight: FontWeight.bold)),
               onPressed: () {
