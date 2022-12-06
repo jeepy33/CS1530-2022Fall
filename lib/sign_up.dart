@@ -74,29 +74,6 @@ class _SignUpPageState extends State<SignUpPage> {
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 25),
                                 cursorColor: Colors.white,
-                                controller: _nameTextController,
-                                focusNode: _focusName,
-                                validator: (value) => Validator.validateName(
-                                  name: value,
-                                ),
-                                decoration: InputDecoration(
-                                  hintText: "Name",
-                                  focusedBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.white),
-                                  ),
-                                  errorBorder: UnderlineInputBorder(
-                                    borderRadius: BorderRadius.circular(6.0),
-                                    borderSide: BorderSide(
-                                      color: Colors.red,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(height: 16.0),
-                              TextFormField(
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 25),
-                                cursorColor: Colors.white,
                                 controller: _emailTextController,
                                 focusNode: _focusEmail,
                                 validator: (value) => Validator.validateEmail(
@@ -154,7 +131,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                                     255, 255, 255, 255),
                                                 padding:
                                                     const EdgeInsets.symmetric(
-                                                        horizontal: 150,
+                                                        horizontal: 50,
                                                         vertical: 30),
                                                 textStyle: const TextStyle(
                                                     fontSize: 25,
@@ -170,7 +147,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                                 User? user = await FireAuth
                                                     .registerUsingEmailPassword(
                                                   name:
-                                                      _nameTextController.text,
+                                                      "",
                                                   email:
                                                       _emailTextController.text,
                                                   password:
