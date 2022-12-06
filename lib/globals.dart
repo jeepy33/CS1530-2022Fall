@@ -1,5 +1,3 @@
-import 'dart:html';
-
 class Globals {
   List<String> styleOptions = [
     'Breakfast',
@@ -101,12 +99,15 @@ class Globals {
   }
 }
 
-class Resturant {
+class Restaurant {
   String name;
   List<String> style;
   List<String> diet;
   String link;
-  Geolocation location;
+  int price;
+  double lon;
+  double lat;
 
-  Resturant(this.name, this.style, this.diet, this.link, this.location);
+  Restaurant(this.name, this.style, this.diet, this.link, this.price, this.lon,
+      this.lat);
 }
