@@ -222,7 +222,7 @@ class _FilterPageState extends State<FilterPage> {
               style: ElevatedButton.styleFrom(
                   backgroundColor: Color.fromARGB(255, 119, 195, 91),
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 96, vertical: 30),
+                      const EdgeInsets.symmetric(horizontal: 45, vertical: 20),
                   textStyle: const TextStyle(
                       fontSize: 25, fontWeight: FontWeight.bold)),
               onPressed: () {
