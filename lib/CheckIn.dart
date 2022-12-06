@@ -4,6 +4,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'constants.dart';
 import 'firebase_options.dart';
+import 'globals.dart';
 
 class CheckPage extends StatefulWidget {
   // This widget is the home page of your application. It is stateful, meaning
@@ -20,12 +21,15 @@ class CheckPage extends StatefulWidget {
 
 class _CheckInPageState extends State<CheckPage> {
   FirebaseFirestore db = FirebaseFirestore.instance;
+  List<Restaurant> restList = [];
 
 
+  // creates a list of all the restaurants in the database
   void test() async {
     await db.collection("restaurants").get().then((event) {
+      int i = 0;
       for (var doc in event.docs) {
-        print("${doc.id} +> ${doc.data()}");
+        restList.add(Restaurant.fromFirestore(doc, null));
       }
     },
       onError: (e) => print("Error getting doc"),

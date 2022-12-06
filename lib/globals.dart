@@ -102,13 +102,14 @@ class Globals {
 }
 
 class Restaurant {
-  final String?name;
-  final List<String>? style;
+  final String? name;
+  final List<String>? styles;
   final List<String>? diet;
   final String? link;
-  final List<double>? location;
+  final GeoPoint? location;
+  final int? price;
 
-  Restaurant({this.name, this.style, this.diet, this.link, this.location});
+  Restaurant({this.name, this.styles, this.diet, this.link, this.location, this.price});
 
   factory Restaurant.fromFirestore(
       DocumentSnapshot<Map<String, dynamic>> snapshot,
@@ -117,10 +118,11 @@ class Restaurant {
     final data = snapshot.data();
     return Restaurant(
       name: data?['name'],
-      style: data?['style'] is Iterable ? List.from(data?['style']) : null,
+      styles: data?['styles'] is Iterable ? List.from(data?['styles']) : null,
       diet: data?['diet'] is Iterable ? List.from(data?['diet']) : null,
       link: data?['link'],
-      location: data?['location'] is Iterable ? List.from(data?['location']) : null,
+      location: data?['location'],
+      price: data?['price'],
     );
   }
 }
