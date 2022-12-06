@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:locate_app/globals.dart';
 import 'package:provider/provider.dart';
 import 'package:iconly/iconly.dart';
 import 'dart:math';
@@ -10,6 +11,9 @@ import 'router.dart' as LocalRouter;
 import 'constants.dart';
 import 'list.dart';
 import 'login.dart';
+import 'globals.dart';
+
+Globals global = new Globals();
 
 void main() {
   runApp(const MyApp());
