@@ -1,4 +1,4 @@
-import 'dart:html';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Globals {
   List<String> styleOptions = [
@@ -101,12 +101,26 @@ class Globals {
   }
 }
 
-class Resturant {
-  String name;
-  List<String> style;
-  List<String> diet;
-  String link;
-  Geolocation location;
+class Restaurant {
+  final String?name;
+  final List<String>? style;
+  final List<String>? diet;
+  final String? link;
+  final List<double>? location;
 
-  Resturant(this.name, this.style, this.diet, this.link, this.location);
+  Restaurant({this.name, this.style, this.diet, this.link, this.location});
+
+  factory Restaurant.fromFirestore(
+      DocumentSnapshot<Map<String, dynamic>> snapshot,
+      SnapshotOptions? options,
+      ) {
+    final data = snapshot.data();
+    return Restaurant(
+      name: data?['name'],
+      style: data?['style'] is Iterable ? List.from(data?['style']) : null,
+      diet: data?['diet'] is Iterable ? List.from(data?['diet']) : null,
+      link: data?['link'],
+      location: data?['location'] is Iterable ? List.from(data?['location']) : null,
+    );
+  }
 }

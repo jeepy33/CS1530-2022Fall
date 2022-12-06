@@ -19,9 +19,7 @@ class CheckPage extends StatefulWidget {
 }
 
 class _CheckInPageState extends State<CheckPage> {
-  //FirebaseDatabase db = FirebaseDatabase.instance;
   FirebaseFirestore db = FirebaseFirestore.instance;
-  DatabaseReference ref = FirebaseDatabase.instance.ref();
 
 
   void test() async {
@@ -113,32 +111,32 @@ class _CheckInPageState extends State<CheckPage> {
         title: new Image.asset("assets/images/Logo.png"),
       ),
 
-      body: FutureBuilder(
-        future: _initializeFirebase(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            print(snapshot.toString());
-            return Padding(
-              padding: const EdgeInsets.only(left: 24.0, right: 24.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                Text(
-                'Login',
-                style: TextStyle(
-                    fontSize: 40,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white),
-              ),
-              const SizedBox(
-                height: 100, // <-- SEE HERE
-              ),
-            ]));
-          }
-          return Center(
-            child: CircularProgressIndicator(),
-          );
-        },
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+        const SizedBox(
+        height: 50, // <-- SEE HERE
+        ),
+        ElevatedButton(
+          style: ElevatedButton.styleFrom(
+              backgroundColor: Color.fromARGB(255, 255, 255, 255),
+              padding:
+              const EdgeInsets.symmetric(horizontal: 77, vertical: 30),
+              textStyle: const TextStyle(
+                  color: Colors.grey,
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold)),
+          onPressed: () {
+            print("test");
+          },
+          child: const Text('Choose Restuarant',
+              style: TextStyle(
+                color: Color.fromARGB(255, 68, 98, 56),
+              )),
+        )]
+        )
       ),
     );
   }
