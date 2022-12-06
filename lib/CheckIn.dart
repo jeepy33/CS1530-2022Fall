@@ -1,5 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'constants.dart';
+import 'firebase_options.dart';
 
 class CheckPage extends StatefulWidget {
   // This widget is the home page of your application. It is stateful, meaning
@@ -10,12 +14,37 @@ class CheckPage extends StatefulWidget {
   // case the title) provided by the parent (in this case the App widget) and
   // used by the build method of the State. Fields in a Widget subclass are
   // always marked "final"
-
   @override
   State<CheckPage> createState() => _CheckInPageState();
 }
 
 class _CheckInPageState extends State<CheckPage> {
+  //FirebaseDatabase db = FirebaseDatabase.instance;
+  FirebaseFirestore db = FirebaseFirestore.instance;
+  DatabaseReference ref = FirebaseDatabase.instance.ref();
+
+
+  void test() async {
+    await db.collection("restaurants").get().then((event) {
+      for (var doc in event.docs) {
+        print("${doc.id} +> ${doc.data()}");
+      }
+    },
+      onError: (e) => print("Error getting doc"),
+    );
+  }
+
+
+  Future<FirebaseApp> _initializeFirebase() async {
+    FirebaseOptions firebaseConfig = DefaultFirebaseOptions.currentPlatform;
+    FirebaseApp firebaseApp =
+    await Firebase.initializeApp(options: firebaseConfig);
+
+    return firebaseApp;
+  }
+
+
+
   int _selectedIndex = 1;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
@@ -52,6 +81,7 @@ class _CheckInPageState extends State<CheckPage> {
 
   @override
   Widget build(BuildContext context) {
+    test();
     return Scaffold(
       backgroundColor:
           Color.fromARGB(255, 119, 195, 91), //0x86c66f // gray 0x8d948b
@@ -83,29 +113,32 @@ class _CheckInPageState extends State<CheckPage> {
         title: new Image.asset("assets/images/Logo.png"),
       ),
 
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  backgroundColor: Color.fromARGB(255, 255, 255, 255),
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 150, vertical: 30),
-                  textStyle: const TextStyle(
-                      fontSize: 25, fontWeight: FontWeight.bold)),
-              onPressed: () {
-                Navigator.pushNamed(context, filterRoute,
-                    arguments: 'arguments/chose Templates');
-              },
-              child: const Text('Trials',
-                  style: TextStyle(
-                    color: Color.fromARGB(255, 68, 98, 56),
-                  )),
-            )
-          ],
-        ),
+      body: FutureBuilder(
+        future: _initializeFirebase(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            print(snapshot.toString());
+            return Padding(
+              padding: const EdgeInsets.only(left: 24.0, right: 24.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                Text(
+                'Login',
+                style: TextStyle(
+                    fontSize: 40,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white),
+              ),
+              const SizedBox(
+                height: 100, // <-- SEE HERE
+              ),
+            ]));
+          }
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        },
       ),
     );
   }
