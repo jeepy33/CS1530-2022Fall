@@ -47,7 +47,7 @@ class _SignInPageState extends State<SignInPage> {
         backgroundColor: Color.fromARGB(255, 119, 195, 91),
         appBar: AppBar(
             backgroundColor: Color.fromARGB(255, 119, 174, 98),
-            title: const Text('LocAte')),
+            title: new Image.asset("assets/images/Logo.png")),
         body: FutureBuilder(
           future: _initializeFirebase(),
           builder: (context, snapshot) {

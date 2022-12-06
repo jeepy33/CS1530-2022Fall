@@ -129,7 +129,7 @@ class _RollFavoritePageState extends State<RollFavoritePage>
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 119, 195, 91),
       appBar: AppBar(
-          title: const Text('LocAte'),
+          title: new Image.asset("assets/images/Logo.png"),
           backgroundColor: Color.fromARGB(255, 119, 174, 98)),
       body: Center(
         child: Column(
