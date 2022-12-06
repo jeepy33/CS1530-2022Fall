@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:math';
 
 import 'package:locate_app/animation/dice.dart';
+import 'package:locate_app/globals.dart';
 
 class RollFavoritePage extends StatefulWidget {
   // This widget is the home page of your application. It is stateful, meaning
@@ -25,6 +26,18 @@ class _RollFavoritePageState extends State<RollFavoritePage>
   late AnimationController _controllerImg;
   late CurvedAnimation animation;
   late CurvedAnimation animationImg;
+  Restaurant restaurant = Restaurant(
+      "",
+      [""],
+      [""],
+      "https://docs.flutter.dev/assets/images/dash/dash-fainting.gif",
+      0,
+      0.0,
+      0.0);
+  int icon1 = 0;
+  int icon2 = 0;
+  int icon3 = 0;
+  int icon4 = 0;
 
   @override
   void initState() {
@@ -81,9 +94,34 @@ class _RollFavoritePageState extends State<RollFavoritePage>
   }
 
   void roll() {
+    icon1 = 0;
+    icon2 = 0;
+    icon3 = 0;
+    icon4 = 0;
     _controller.value = 0;
     _controllerImg.value = 0;
     _controller.forward();
+    // TODO: Query Goes Here
+    restaurant = Restaurant(
+        "Chick'n Bubbly",
+        ["Asian", "BBQ"],
+        ["Low-Carb", "Paleo", "Gluten-Free"],
+        "https://pbs.twimg.com/media/EW77ToxWoAEGcby?format=jpg&name=4096x4096",
+        1,
+        40.44170233050063,
+        -79.95725526440444);
+    if (restaurant.price > 0) {
+      icon1 = 1;
+    }
+    if (restaurant.price > 1) {
+      icon2 = 1;
+    }
+    if (restaurant.price > 2) {
+      icon3 = 1;
+    }
+    if (restaurant.price > 3) {
+      icon4 = 1;
+    }
   }
 
   @override
@@ -100,7 +138,7 @@ class _RollFavoritePageState extends State<RollFavoritePage>
             GestureDetector(
               onDoubleTap: roll,
               child: Padding(
-                padding: EdgeInsets.all(0),
+                padding: EdgeInsets.all(10),
                 child: Image(
                   width: 160 - 160 * _controller.value,
                   image: AssetImage(
@@ -108,14 +146,44 @@ class _RollFavoritePageState extends State<RollFavoritePage>
                 ),
               ),
             ),
+            Text(
+              restaurant.name,
+              textScaleFactor: _controllerImg.value,
+              style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                  fontSize: 30.0),
+            ),
             GestureDetector(
               onDoubleTap: roll,
               child: Padding(
-                  padding: EdgeInsets.all(0),
+                  padding: EdgeInsets.all(10),
                   child: Image.network(
-                    'https://googleflutter.com/sample_image.jpg',
+                    restaurant.link,
                     width: 0 + 350 * _controllerImg.value,
                   )),
+            ),
+            Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+              Icon(Icons.attach_money_sharp,
+                  color: Colors.white,
+                  size: icon1 * (0 + 40 * _controllerImg.value)),
+              Icon(Icons.attach_money_sharp,
+                  color: Colors.white,
+                  size: icon2 * (0 + 40 * _controllerImg.value)),
+              Icon(Icons.attach_money_sharp,
+                  color: Colors.white,
+                  size: icon3 * (0 + 40 * _controllerImg.value)),
+              Icon(Icons.attach_money_sharp,
+                  color: Colors.white,
+                  size: icon4 * (0 + 40 * _controllerImg.value)),
+            ]),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: createTexttextfields(restaurant.diet),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: createTexttextfields(restaurant.style),
             ),
             ElevatedButton(
               onPressed: roll,
@@ -130,5 +198,30 @@ class _RollFavoritePageState extends State<RollFavoritePage>
         ),
       ),
     );
+  }
+
+  createTexttextfields(List<String> list) {
+    var textEditingControllers = <TextEditingController>[];
+
+    var textFields = <Padding>[];
+
+    list.forEach((i) {
+      var textEditingController = Padding(
+          padding: const EdgeInsets.only(right: 10),
+          child: ElevatedButton(
+              onPressed: () {},
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.white, minimumSize: const Size(0, 0)),
+              child: Text(
+                "$i",
+                textScaleFactor: _controllerImg.value,
+                style: const TextStyle(
+                    color: Color.fromARGB(255, 119, 174, 98),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18),
+              )));
+      return textFields.add((textEditingController));
+    });
+    return textFields;
   }
 }
