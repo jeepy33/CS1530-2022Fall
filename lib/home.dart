@@ -80,7 +80,8 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 119, 174, 98),
         automaticallyImplyLeading: false,
-        title: const Text('LocAte'),
+        //title: const Text('LocAte'),
+        title: new Image.asset("assets/images/Logo.png"),
       ),
 
       body: Center(
