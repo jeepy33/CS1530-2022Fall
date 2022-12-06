@@ -28,6 +28,40 @@ class CheckPage extends StatefulWidget {
 //class MapSampleState extends State<MapSample> {
 //Completer<GoogleMapController> _controller = Completer();
 class _CheckInPageState extends State<CheckPage> {
+  int _selectedIndex = 1;
+  static const TextStyle optionStyle =
+      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  static const List<Widget> _pages = <Widget>[
+    Text(
+      'Index 0: Home',
+      style: optionStyle,
+    ),
+    Text(
+      'Index 1: CheckIn',
+      style: optionStyle,
+    ),
+    Text(
+      'Index 2: Filters',
+      style: optionStyle,
+    ),
+  ];
+
+  void _onItemTapped(int index) {
+    if (index == 2) {
+      _selectedIndex = 2;
+      Navigator.pushNamed(context, filterRoute,
+          arguments: 'arguments/chose Templates');
+    } else if (index == 1) {
+      _selectedIndex = 1;
+      Navigator.pushNamed(context, checkInRoute,
+          arguments: 'arguments/chose Templates');
+    } else if (index == 0) {
+      _selectedIndex = 0;
+      Navigator.pushNamed(context, homeRoute,
+          arguments: 'arguments/chose Templates');
+    }
+  }
+
   final Map<String, Marker> _markers = {};
   Future<void> _onMapCreated(GoogleMapController controller) async {
     final googleOffices = await locations.getGoogleOffices();
@@ -51,6 +85,27 @@ class _CheckInPageState extends State<CheckPage> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+        bottomNavigationBar: BottomNavigationBar(
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Home',
+              //_pages:
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.search),
+              label: 'Check In',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.filter_alt),
+              label: 'Filters',
+            ),
+          ],
+          //unselectedItemColor: Colors.amber,
+          currentIndex: _selectedIndex,
+          selectedItemColor: Color.fromARGB(255, 119, 195, 91),
+          onTap: _onItemTapped,
+        ),
         appBar: AppBar(
           title: new Image.asset("assets/images/Logo.png"),
           backgroundColor: Color.fromARGB(255, 119, 174, 98),
