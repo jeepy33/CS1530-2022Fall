@@ -39,15 +39,14 @@ class _CheckInPageState extends State<CheckPage> {
       _selectedIndex = 2;
       Navigator.pushNamed(context, filterRoute,
           arguments: 'arguments/chose Templates');
-      if (index == 1) {
-        _selectedIndex = 1;
-        Navigator.pushNamed(context, checkInRoute,
-            arguments: 'arguments/chose Templates');
-      } else if (index == 0) {
-        _selectedIndex = 0;
-        Navigator.pushNamed(context, homeRoute,
-            arguments: 'arguments/chose Templates');
-      }
+    } else if (index == 1) {
+      _selectedIndex = 1;
+      Navigator.pushNamed(context, checkInRoute,
+          arguments: 'arguments/chose Templates');
+    } else if (index == 0) {
+      _selectedIndex = 0;
+      Navigator.pushNamed(context, homeRoute,
+          arguments: 'arguments/chose Templates');
     }
   }
 
@@ -72,7 +71,7 @@ class _CheckInPageState extends State<CheckPage> {
             label: 'Filters',
           ),
         ],
-        // unselectedItemColor: Colors.amber,
+        //unselectedItemColor: Colors.amber,
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.amber,
         onTap: _onItemTapped,
@@ -81,7 +80,7 @@ class _CheckInPageState extends State<CheckPage> {
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 119, 174, 98),
         automaticallyImplyLeading: false,
-        title: const Text('LocAte'),
+        title: new Image.asset("assets/images/Logo.png"),
       ),
 
       body: Center(
