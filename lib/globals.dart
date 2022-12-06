@@ -1,4 +1,7 @@
 class Globals {
+  double distance = 0;
+  double price = 0;
+
   List<String> styleOptions = [
     'Breakfast',
     'Bakery',

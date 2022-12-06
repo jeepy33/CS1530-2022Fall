@@ -14,11 +14,11 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor:
-      Color.fromARGB(255, 119, 195, 91), //0x86c66f // gray 0x8d948b
+          Color.fromARGB(255, 119, 195, 91), //0x86c66f // gray 0x8d948b
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 119, 174, 98),
         automaticallyImplyLeading: false,
-        title: const Text('LocAte'),
+        title: new Image.asset("assets/images/Logo.png"),
       ),
       body: Center(
         child: Column(
@@ -32,7 +32,7 @@ class _LoginPageState extends State<LoginPage> {
               style: ElevatedButton.styleFrom(
                   backgroundColor: Color.fromARGB(255, 255, 255, 255),
                   padding:
-                  const EdgeInsets.symmetric(horizontal: 120, vertical: 30),
+                      const EdgeInsets.symmetric(horizontal: 120, vertical: 30),
                   textStyle: const TextStyle(
                       fontSize: 25, fontWeight: FontWeight.bold)),
               onPressed: () {
@@ -51,7 +51,7 @@ class _LoginPageState extends State<LoginPage> {
               style: ElevatedButton.styleFrom(
                   backgroundColor: Color.fromARGB(255, 255, 255, 255),
                   padding:
-                  const EdgeInsets.symmetric(horizontal: 115, vertical: 30),
+                      const EdgeInsets.symmetric(horizontal: 115, vertical: 30),
                   textStyle: const TextStyle(
                       fontSize: 25, fontWeight: FontWeight.bold)),
               onPressed: () {
