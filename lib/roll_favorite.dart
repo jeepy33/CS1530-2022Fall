@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 
@@ -26,14 +27,21 @@ class _RollFavoritePageState extends State<RollFavoritePage>
   late AnimationController _controllerImg;
   late CurvedAnimation animation;
   late CurvedAnimation animationImg;
-  Restaurant restaurant = Restaurant(
-      "",
-      [""],
-      [""],
-      "https://docs.flutter.dev/assets/images/dash/dash-fainting.gif",
-      0,
-      0.0,
-      0.0);
+  FirebaseFirestore db = FirebaseFirestore.instance;
+  List<Restaurant> restList = [];
+
+
+  // creates a list of all the restaurants in the database
+  void getRestaurants() async {
+    await db.collection("restaurants").get().then((event) {
+      for (var doc in event.docs) {
+        restList.add(Restaurant.fromFirestore(doc, null));
+        print(doc.data().toString());
+      }
+    },
+      onError: (e) => print("Error getting doc"),
+    );
+  }
   int icon1 = 0;
   int icon2 = 0;
   int icon3 = 0;
@@ -102,30 +110,26 @@ class _RollFavoritePageState extends State<RollFavoritePage>
     _controllerImg.value = 0;
     _controller.forward();
     // TODO: Query Goes Here
-    restaurant = Restaurant(
-        "Chick'n Bubbly",
-        ["Asian", "BBQ"],
-        ["Low-Carb", "Paleo", "Gluten-Free"],
-        "https://pbs.twimg.com/media/EW77ToxWoAEGcby?format=jpg&name=4096x4096",
-        1,
-        40.44170233050063,
-        -79.95725526440444);
-    if (restaurant.price > 0) {
+    getRestaurants();
+    Restaurant restaurant = restList[0];
+    if (restaurant.price! > 0) {
       icon1 = 1;
     }
-    if (restaurant.price > 1) {
+    if (restaurant.price! > 1) {
       icon2 = 1;
     }
-    if (restaurant.price > 2) {
+    if (restaurant.price! > 2) {
       icon3 = 1;
     }
-    if (restaurant.price > 3) {
+    if (restaurant.price! > 3) {
       icon4 = 1;
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    getRestaurants();
+    Restaurant restaurant = restList[0];
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 119, 195, 91),
       appBar: AppBar(
@@ -147,7 +151,7 @@ class _RollFavoritePageState extends State<RollFavoritePage>
               ),
             ),
             Text(
-              restaurant.name,
+              restaurant.name!,
               textScaleFactor: _controllerImg.value,
               style: const TextStyle(
                   fontWeight: FontWeight.bold,
@@ -159,7 +163,7 @@ class _RollFavoritePageState extends State<RollFavoritePage>
               child: Padding(
                   padding: EdgeInsets.all(10),
                   child: Image.network(
-                    restaurant.link,
+                    restaurant.link!,
                     width: 0 + 350 * _controllerImg.value,
                   )),
             ),
@@ -179,11 +183,11 @@ class _RollFavoritePageState extends State<RollFavoritePage>
             ]),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: createTexttextfields(restaurant.diet),
+              children: createTexttextfields(restaurant.diet!),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: createTexttextfields(restaurant.style),
+              children: createTexttextfields(restaurant.styles!),
             ),
             ElevatedButton(
               onPressed: roll,
