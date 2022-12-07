@@ -32,20 +32,18 @@ class _RollNewPageState extends State<RollNewPage>
   FirebaseFirestore db = FirebaseFirestore.instance;
   List<Restaurant> restList = [];
 
-
   // creates a list of all the restaurants in the database
   void getRestaurants() async {
-    await db.collection("restaurants").get().then((event) {
-      int i = 0;
-      for (var doc in event.docs) {
-        restList.add(Restaurant.fromFirestore(doc, null));
-      }
-    },
+    await db.collection("restaurants").get().then(
+      (event) {
+        int i = 0;
+        for (var doc in event.docs) {
+          restList.add(Restaurant.fromFirestore(doc, null));
+        }
+      },
       onError: (e) => print("Error getting doc"),
     );
   }
-
-
 
   int icon1 = 0;
   int icon2 = 0;
