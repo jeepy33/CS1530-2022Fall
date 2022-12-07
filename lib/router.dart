@@ -6,7 +6,7 @@ import 'roll_new.dart';
 import 'filter.dart';
 import 'sign_in.dart';
 import 'sign_up.dart';
-import 'checkIn.dart';
+import 'CheckIn.dart';
 
 import 'constants.dart';
 

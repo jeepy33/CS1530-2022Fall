@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class Globals {
   double distance = 0;
   double price = 0;
@@ -103,14 +105,28 @@ class Globals {
 }
 
 class Restaurant {
-  String name;
-  List<String> style;
-  List<String> diet;
-  String link;
-  int price;
-  double lon;
-  double lat;
+  final String? name;
+  final List<String>? styles;
+  final List<String>? diet;
+  final String? link;
+  final GeoPoint? location;
+  final int? price;
 
-  Restaurant(this.name, this.style, this.diet, this.link, this.price, this.lon,
-      this.lat);
+  Restaurant({this.name, this.styles, this.diet, this.link, this.location, this.price});
+
+  factory Restaurant.fromFirestore(
+      DocumentSnapshot<Map<String, dynamic>> snapshot,
+      SnapshotOptions? options,
+      ) {
+    final data = snapshot.data();
+    return Restaurant(
+      name: data?['name'],
+      styles: data?['styles'] is Iterable ? List.from(data?['styles']) : null,
+      diet: data?['diet'] is Iterable ? List.from(data?['diet']) : null,
+      link: data?['link'],
+      location: data?['location'],
+      price: data?['price'],
+    );
+  }
+
 }

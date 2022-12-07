@@ -1,5 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'constants.dart';
+import 'firebase_options.dart';
+import 'globals.dart';
 
 class CheckPage extends StatefulWidget {
   // This widget is the home page of your application. It is stateful, meaning
@@ -10,12 +15,38 @@ class CheckPage extends StatefulWidget {
   // case the title) provided by the parent (in this case the App widget) and
   // used by the build method of the State. Fields in a Widget subclass are
   // always marked "final"
-
   @override
   State<CheckPage> createState() => _CheckInPageState();
 }
 
 class _CheckInPageState extends State<CheckPage> {
+  FirebaseFirestore db = FirebaseFirestore.instance;
+  List<Restaurant> restList = [];
+
+
+  // creates a list of all the restaurants in the database
+  void test() async {
+    await db.collection("restaurants").get().then((event) {
+      int i = 0;
+      for (var doc in event.docs) {
+        restList.add(Restaurant.fromFirestore(doc, null));
+      }
+    },
+      onError: (e) => print("Error getting doc"),
+    );
+  }
+
+
+  Future<FirebaseApp> _initializeFirebase() async {
+    FirebaseOptions firebaseConfig = DefaultFirebaseOptions.currentPlatform;
+    FirebaseApp firebaseApp =
+    await Firebase.initializeApp(options: firebaseConfig);
+
+    return firebaseApp;
+  }
+
+
+
   int _selectedIndex = 1;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
@@ -52,6 +83,7 @@ class _CheckInPageState extends State<CheckPage> {
 
   @override
   Widget build(BuildContext context) {
+    test();
     return Scaffold(
       backgroundColor:
           Color.fromARGB(255, 119, 195, 91), //0x86c66f // gray 0x8d948b
@@ -88,24 +120,27 @@ class _CheckInPageState extends State<CheckPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  backgroundColor: Color.fromARGB(255, 255, 255, 255),
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 150, vertical: 30),
-                  textStyle: const TextStyle(
-                      fontSize: 25, fontWeight: FontWeight.bold)),
-              onPressed: () {
-                Navigator.pushNamed(context, filterRoute,
-                    arguments: 'arguments/chose Templates');
-              },
-              child: const Text('Trials',
-                  style: TextStyle(
-                    color: Color.fromARGB(255, 68, 98, 56),
-                  )),
-            )
-          ],
+        const SizedBox(
+        height: 50, // <-- SEE HERE
         ),
+        ElevatedButton(
+          style: ElevatedButton.styleFrom(
+              backgroundColor: Color.fromARGB(255, 255, 255, 255),
+              padding:
+              const EdgeInsets.symmetric(horizontal: 77, vertical: 30),
+              textStyle: const TextStyle(
+                  color: Colors.grey,
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold)),
+          onPressed: () {
+            print("test");
+          },
+          child: const Text('Choose Restuarant',
+              style: TextStyle(
+                color: Color.fromARGB(255, 68, 98, 56),
+              )),
+        )]
+        )
       ),
     );
   }

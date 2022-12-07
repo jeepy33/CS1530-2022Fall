@@ -45,6 +45,8 @@ dependencies:
 
   spritewidget: ^2.0.1
   firebase_auth: ^4.1.4
+  firebase_database: ^10.0.6
+  cloud_firestore: ^4.1.0
 
 
 dev_dependencies:

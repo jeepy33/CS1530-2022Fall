@@ -1,9 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="9c773395-c348-44ae-b916-6c4ee0a43f33" name="Changes" comment="">
+    <list default="true" id="9c773395-c348-44ae-b916-6c4ee0a43f33" name="Changes" comment="Created a basic test">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/widget_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/test/widget_test.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/flutter_assets/AssetManifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/build/flutter_assets/AssetManifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/flutter_assets/NOTICES" beforeDir="false" afterPath="$PROJECT_DIR$/build/flutter_assets/NOTICES" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/flutter_assets/shaders/ink_sparkle.frag" beforeDir="false" afterPath="$PROJECT_DIR$/build/flutter_assets/shaders/ink_sparkle.frag" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/test_cache/build/c075001b96339384a97db4862b8ab8db.cache.dill.track.dill" beforeDir="false" afterPath="$PROJECT_DIR$/build/test_cache/build/c075001b96339384a97db4862b8ab8db.cache.dill.track.dill" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/unit_test_assets/AssetManifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/build/unit_test_assets/AssetManifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/unit_test_assets/FontManifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/build/unit_test_assets/FontManifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/unit_test_assets/NOTICES.Z" beforeDir="false" afterPath="$PROJECT_DIR$/build/unit_test_assets/NOTICES.Z" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/CheckIn.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/CheckIn.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/globals.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/globals.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/macos/Flutter/GeneratedPluginRegistrant.swift" beforeDir="false" afterPath="$PROJECT_DIR$/macos/Flutter/GeneratedPluginRegistrant.swift" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,7 +59,12 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -61,7 +78,12 @@
       <workItem from="1668976779740" duration="1752000" />
       <workItem from="1668978720516" duration="465000" />
       <workItem from="1669737947674" duration="68000" />
-      <workItem from="1669755350807" duration="4207000" />
+      <workItem from="1669755350807" duration="4318000" />
+      <workItem from="1670027180653" duration="1262000" />
+      <workItem from="1670168641805" duration="48000" />
+      <workItem from="1670168735027" duration="278000" />
+      <workItem from="1670169276391" duration="11013000" />
+      <workItem from="1670346246661" duration="12410000" />
     </task>
     <task id="LOCAL-00001" summary="Refactor main.dart into separate files">
       <created>1668978799200</created>
@@ -77,7 +99,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669759247156</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Created a basic test">
+      <created>1669759900653</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1669759900653</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -92,6 +121,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Refactor main.dart into separate files" />
     <MESSAGE value="Implemented sign in through Firebase" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implemented sign in through Firebase" />
+    <MESSAGE value="Created a basic test" />
+    <option name="LAST_COMMIT_MESSAGE" value="Created a basic test" />
   </component>
 </project>
