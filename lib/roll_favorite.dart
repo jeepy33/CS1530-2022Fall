@@ -29,19 +29,26 @@ class _RollFavoritePageState extends State<RollFavoritePage>
   late CurvedAnimation animationImg;
   FirebaseFirestore db = FirebaseFirestore.instance;
   List<Restaurant> restList = [];
-
+  Restaurant restaurant = Restaurant(
+      name: "",
+      diet: [""],
+      styles: [""],
+      link: "https://docs.flutter.dev/assets/images/dash/dash-fainting.gif",
+      price: 0);
 
   // creates a list of all the restaurants in the database
   void getRestaurants() async {
-    await db.collection("restaurants").get().then((event) {
-      for (var doc in event.docs) {
-        restList.add(Restaurant.fromFirestore(doc, null));
-        print(doc.data().toString());
-      }
-    },
+    await db.collection("restaurants").get().then(
+      (event) {
+        for (var doc in event.docs) {
+          restList.add(Restaurant.fromFirestore(doc, null));
+          //print(doc.data().toString());
+        }
+      },
       onError: (e) => print("Error getting doc"),
     );
   }
+
   int icon1 = 0;
   int icon2 = 0;
   int icon3 = 0;
@@ -110,8 +117,8 @@ class _RollFavoritePageState extends State<RollFavoritePage>
     _controllerImg.value = 0;
     _controller.forward();
     // TODO: Query Goes Here
-    getRestaurants();
-    Restaurant restaurant = restList[0];
+    restaurant = restList[1];
+    print(restaurant);
     if (restaurant.price! > 0) {
       icon1 = 1;
     }
@@ -129,7 +136,7 @@ class _RollFavoritePageState extends State<RollFavoritePage>
   @override
   Widget build(BuildContext context) {
     getRestaurants();
-    Restaurant restaurant = restList[0];
+
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 119, 195, 91),
       appBar: AppBar(
@@ -181,14 +188,15 @@ class _RollFavoritePageState extends State<RollFavoritePage>
                   color: Colors.white,
                   size: icon4 * (0 + 40 * _controllerImg.value)),
             ]),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: createTexttextfields(restaurant.diet!),
+            Wrap(
+              alignment: WrapAlignment.center,
+              children: (createTexttextfields(
+                  List.from(restaurant.diet!)..addAll(restaurant.styles!))),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: createTexttextfields(restaurant.styles!),
-            ),
+            // Wrap(
+            //   alignment: WrapAlignment.center,
+            //   children: createTexttextfields(restaurant.styles!),
+            // ),
             ElevatedButton(
               onPressed: roll,
               style: ElevatedButton.styleFrom(

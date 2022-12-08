@@ -27,7 +27,8 @@ class Globals {
     'Grill',
     'Burgers',
     'Desert',
-    'Salad'
+    'Salad',
+    'Middle-Eastern'
   ];
 
   List<bool> styleSelected = [
@@ -112,12 +113,18 @@ class Restaurant {
   final GeoPoint? location;
   final int? price;
 
-  Restaurant({this.name, this.styles, this.diet, this.link, this.location, this.price});
+  Restaurant(
+      {this.name,
+      this.styles,
+      this.diet,
+      this.link,
+      this.location,
+      this.price});
 
   factory Restaurant.fromFirestore(
-      DocumentSnapshot<Map<String, dynamic>> snapshot,
-      SnapshotOptions? options,
-      ) {
+    DocumentSnapshot<Map<String, dynamic>> snapshot,
+    SnapshotOptions? options,
+  ) {
     final data = snapshot.data();
     return Restaurant(
       name: data?['name'],
@@ -129,4 +136,9 @@ class Restaurant {
     );
   }
 
+  @override
+  String toString() {
+    // TODO: implement toString
+    return '${this.name}: \n   diet: ${this.diet}\n   style: ${this.styles}\n   price: ${this.price}\n   link: ${this.link}\n   location: ${this.location}]n';
+  }
 }
