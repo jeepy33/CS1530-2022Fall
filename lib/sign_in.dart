@@ -5,6 +5,7 @@ import 'constants.dart';
 import 'fire_auth.dart';
 import 'validator.dart';
 import 'firebase_options.dart';
+import 'main.dart';
 
 class SignInPage extends StatefulWidget {
   @override
@@ -14,7 +15,6 @@ class SignInPage extends StatefulWidget {
 class _SignInPageState extends State<SignInPage> {
   final _formKey = GlobalKey<FormState>();
 
-  final _emailTextController = TextEditingController();
   final _passwordTextController = TextEditingController();
 
   final _focusEmail = FocusNode();
@@ -74,7 +74,7 @@ class _SignInPageState extends State<SignInPage> {
                           TextFormField(
                             style: TextStyle(color: Colors.white, fontSize: 25),
                             cursorColor: Colors.white,
-                            controller: _emailTextController,
+                            controller: global.emailTextController,
                             focusNode: _focusEmail,
                             validator: (value) => Validator.validateEmail(
                               email: value,
@@ -146,7 +146,8 @@ class _SignInPageState extends State<SignInPage> {
 
                                             User? user = await FireAuth
                                                 .signInUsingEmailPassword(
-                                              email: _emailTextController.text,
+                                              email: global
+                                                  .emailTextController.text,
                                               password:
                                                   _passwordTextController.text,
                                               context: context,

@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:locate_app/main.dart';
 import 'constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'fire_auth.dart';
@@ -15,7 +16,6 @@ class _SignUpPageState extends State<SignUpPage> {
   final _registerFormKey = GlobalKey<FormState>();
 
   final _nameTextController = TextEditingController();
-  final _emailTextController = TextEditingController();
   final _passwordTextController = TextEditingController();
 
   final _focusName = FocusNode();
@@ -44,7 +44,7 @@ class _SignUpPageState extends State<SignUpPage> {
         backgroundColor: Color.fromARGB(255, 119, 195, 91),
         appBar: AppBar(
           backgroundColor: Color.fromARGB(255, 119, 174, 98),
-          title: new Image.asset("assets/images/Logo.png"),
+          title: Image.asset("assets/images/Logo.png"),
         ),
         body: FutureBuilder(
             future: _initializeFirebase(),
@@ -56,7 +56,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
+                        const Text(
                           'Register',
                           style: TextStyle(
                               fontSize: 40,
@@ -74,14 +74,14 @@ class _SignUpPageState extends State<SignUpPage> {
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 25),
                                 cursorColor: Colors.white,
-                                controller: _emailTextController,
+                                controller: global.emailTextController,
                                 focusNode: _focusEmail,
                                 validator: (value) => Validator.validateEmail(
                                   email: value,
                                 ),
                                 decoration: InputDecoration(
                                   hintText: "Email",
-                                  focusedBorder: UnderlineInputBorder(
+                                  focusedBorder: const UnderlineInputBorder(
                                     borderSide: BorderSide(color: Colors.white),
                                   ),
                                   errorBorder: UnderlineInputBorder(
@@ -92,7 +92,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                   ),
                                 ),
                               ),
-                              SizedBox(height: 16.0),
+                              const SizedBox(height: 16.0),
                               TextFormField(
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 25),
@@ -147,8 +147,8 @@ class _SignUpPageState extends State<SignUpPage> {
                                                 User? user = await FireAuth
                                                     .registerUsingEmailPassword(
                                                   name: "",
-                                                  email:
-                                                      _emailTextController.text,
+                                                  email: global
+                                                      .emailTextController.text,
                                                   password:
                                                       _passwordTextController
                                                           .text,
@@ -156,6 +156,15 @@ class _SignUpPageState extends State<SignUpPage> {
 
                                                 setState(() {
                                                   _isProcessing = false;
+                                                  global.users
+                                                      .doc(
+                                                          '${global.emailTextController.text}')
+                                                      .set({
+                                                    'name': global
+                                                        .emailTextController
+                                                        .text,
+                                                    'familar': ['']
+                                                  });
                                                 });
 
                                                 if (user != null) {

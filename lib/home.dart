@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'constants.dart';
+import 'main.dart';
 
 class HomePage extends StatefulWidget {
   // This widget is the home page of your application. It is stateful, meaning
@@ -104,6 +105,7 @@ class _HomePageState extends State<HomePage> {
               onPressed: () {
                 Navigator.pushNamed(context, roll1Route,
                     arguments: 'arguments/chose Templates');
+                global.getRestaurantsFav();
               },
               child: const Text('Favorite Restuarant',
                   style: TextStyle(
@@ -123,6 +125,7 @@ class _HomePageState extends State<HomePage> {
               onPressed: () {
                 Navigator.pushNamed(context, roll2Route,
                     arguments: 'arguments/chose Templates');
+                global.getRestaurantsNew();
               },
               child: const Text('New Restuarant',
                   style: TextStyle(

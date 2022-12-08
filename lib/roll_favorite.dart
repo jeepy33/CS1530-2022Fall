@@ -1,8 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 
 import 'package:locate_app/animation/dice.dart';
-import 'package:locate_app/globals.dart';
+import 'main.dart';
+import 'globals.dart';
 
 class RollFavoritePage extends StatefulWidget {
   // This widget is the home page of your application. It is stateful, meaning
@@ -15,10 +17,10 @@ class RollFavoritePage extends StatefulWidget {
   // always marked "final"
 
   @override
-  State<RollFavoritePage> createState() => _RollFavoritePageState();
+  State<RollFavoritePage> createState() => RollFavoritePageState();
 }
 
-class _RollFavoritePageState extends State<RollFavoritePage>
+class RollFavoritePageState extends State<RollFavoritePage>
     with TickerProviderStateMixin {
   int leftDiceNumber = 0;
   int rightDiceNumber = 0;
@@ -26,14 +28,18 @@ class _RollFavoritePageState extends State<RollFavoritePage>
   late AnimationController _controllerImg;
   late CurvedAnimation animation;
   late CurvedAnimation animationImg;
+  bool toggle = true;
+
+  int resIndex = 0;
   Restaurant restaurant = Restaurant(
-      "",
-      [""],
-      [""],
-      "https://docs.flutter.dev/assets/images/dash/dash-fainting.gif",
-      0,
-      0.0,
-      0.0);
+      name: "",
+      diet: [""],
+      styles: [""],
+      link: "https://docs.flutter.dev/assets/images/dash/dash-fainting.gif",
+      price: 0);
+
+  // creates a list of all the restaurants in the database
+
   int icon1 = 0;
   int icon2 = 0;
   int icon3 = 0;
@@ -94,38 +100,50 @@ class _RollFavoritePageState extends State<RollFavoritePage>
   }
 
   void roll() {
-    icon1 = 0;
-    icon2 = 0;
-    icon3 = 0;
-    icon4 = 0;
-    _controller.value = 0;
-    _controllerImg.value = 0;
-    _controller.forward();
-    // TODO: Query Goes Here
-    restaurant = Restaurant(
-        "Chick'n Bubbly",
-        ["Asian", "BBQ"],
-        ["Low-Carb", "Paleo", "Gluten-Free"],
-        "https://pbs.twimg.com/media/EW77ToxWoAEGcby?format=jpg&name=4096x4096",
-        1,
-        40.44170233050063,
-        -79.95725526440444);
-    if (restaurant.price > 0) {
-      icon1 = 1;
-    }
-    if (restaurant.price > 1) {
-      icon2 = 1;
-    }
-    if (restaurant.price > 2) {
-      icon3 = 1;
-    }
-    if (restaurant.price > 3) {
-      icon4 = 1;
-    }
+    setState(() {
+      icon1 = 0;
+      icon2 = 0;
+      icon3 = 0;
+      icon4 = 0;
+      _controller.value = 0;
+      _controllerImg.value = 0;
+      _controller.forward();
+
+      // TODO: Query Goes Here
+      if (resIndex >= global.restList.length) {
+        resIndex = 0;
+      }
+      restaurant = global.restList[resIndex];
+
+      if (resIndex < global.restList.length) {
+        resIndex++;
+      }
+      print(restaurant);
+      if (restaurant.price! > 0) {
+        icon1 = 1;
+      }
+      if (restaurant.price! > 1) {
+        icon2 = 1;
+      }
+      if (restaurant.price! > 2) {
+        icon3 = 1;
+      }
+      if (restaurant.price! > 3) {
+        icon4 = 1;
+      }
+
+      if (global.familar.contains(restaurant.name)) {
+        toggle = true;
+      } else {
+        toggle = false;
+      }
+    });
   }
 
   @override
   Widget build(BuildContext context) {
+    global.getRestaurantsFav();
+
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 119, 195, 91),
       appBar: AppBar(
@@ -136,18 +154,17 @@ class _RollFavoritePageState extends State<RollFavoritePage>
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             GestureDetector(
-              onDoubleTap: roll,
-              child: Padding(
-                padding: EdgeInsets.all(10),
-                child: Image(
-                  width: 160 - 160 * _controller.value,
-                  image: AssetImage(
-                      'assets/images/dice_$leftDiceNumber$rightDiceNumber.png'),
-                ),
-              ),
-            ),
+                onDoubleTap: roll,
+                child: Padding(
+                  padding: EdgeInsets.all(10),
+                  child: Image(
+                    width: 160 - 160 * _controller.value,
+                    image: AssetImage(
+                        'assets/images/dice_$leftDiceNumber$rightDiceNumber.png'),
+                  ),
+                )),
             Text(
-              restaurant.name,
+              restaurant.name!,
               textScaleFactor: _controllerImg.value,
               style: const TextStyle(
                   fontWeight: FontWeight.bold,
@@ -155,14 +172,47 @@ class _RollFavoritePageState extends State<RollFavoritePage>
                   fontSize: 30.0),
             ),
             GestureDetector(
-              onDoubleTap: roll,
-              child: Padding(
-                  padding: EdgeInsets.all(10),
-                  child: Image.network(
-                    restaurant.link,
-                    width: 0 + 350 * _controllerImg.value,
-                  )),
-            ),
+                onDoubleTap: roll,
+                child: Padding(
+                  padding:
+                      EdgeInsets.only(right: 40, left: 40, top: 10, bottom: 10),
+                  child: Stack(children: <Widget>[
+                    Image.network(
+                      restaurant.link!,
+                      width: 0 + 350 * _controllerImg.value,
+                    ),
+                    Align(
+                        alignment: Alignment.bottomRight,
+                        child: Padding(
+                            padding: EdgeInsets.only(right: 15, top: 15),
+                            child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  minimumSize: const Size(0, 0),
+                                  backgroundColor:
+                                      toggle ? Colors.white : Colors.red,
+                                ),
+                                onPressed: () {
+                                  setState(() {
+                                    if (!toggle) {
+                                      global.familar.add(restaurant.name!);
+                                    } else {
+                                      global.familar.remove(restaurant.name!);
+                                    }
+                                    toggle = !toggle;
+                                    global.users
+                                        .doc(
+                                            '${global.emailTextController.text}')
+                                        .set({
+                                      'name': global.emailTextController.text,
+                                      'familar': global.familar
+                                    });
+                                  });
+                                },
+                                child: Icon(Icons.close,
+                                    color: toggle ? Colors.grey : Colors.white,
+                                    size: 50 * _controllerImg.value))))
+                  ]),
+                )),
             Row(mainAxisAlignment: MainAxisAlignment.center, children: [
               Icon(Icons.attach_money_sharp,
                   color: Colors.white,
@@ -177,14 +227,15 @@ class _RollFavoritePageState extends State<RollFavoritePage>
                   color: Colors.white,
                   size: icon4 * (0 + 40 * _controllerImg.value)),
             ]),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: createTexttextfields(restaurant.diet),
+            Wrap(
+              alignment: WrapAlignment.center,
+              children: (createTexttextfields(
+                  List.from(restaurant.diet!)..addAll(restaurant.styles!))),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: createTexttextfields(restaurant.style),
-            ),
+            // Wrap(
+            //   alignment: WrapAlignment.center,
+            //   children: createTexttextfields(restaurant.styles!),
+            // ),
             ElevatedButton(
               onPressed: roll,
               style: ElevatedButton.styleFrom(
