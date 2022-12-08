@@ -1,8 +1,168 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 
 class Globals {
   double distance = 0;
   double price = 0;
+  List<Restaurant> restList = [];
+  FirebaseFirestore db = FirebaseFirestore.instance;
+  CollectionReference users = FirebaseFirestore.instance.collection('users');
+  final emailTextController = TextEditingController();
+  List<String> familar = [];
+
+  void getRestaurantsFav() async {
+    await users.doc('${emailTextController.text}').get().then((value) {
+      familar = List.from(value['familar']);
+    });
+    restList = [];
+    await db.collection("restaurants").get().then(
+      (event) {
+        for (var doc in event.docs) {
+          if (passFiltersFav(doc)) {
+            restList.add(Restaurant.fromFirestore(doc, null));
+          }
+        }
+      },
+      onError: (e) => print("Error getting doc"),
+    );
+  }
+
+  bool passFiltersFav(var doc) {
+    List<String> diet = getActiveDiet();
+    List<String> styles = getActiveStyle();
+    List<String> dietR = List.from(doc.data()['diet']);
+    List<String> stylesR = List.from(doc.data()['styles']);
+    int priceR = doc.data()['price'];
+    String nameR = doc.data()['name'];
+    bool passDiet = false;
+    bool passStyle = false;
+    bool passPrice = true;
+
+    if (!familar.contains(nameR)) {
+      return false;
+    }
+
+    if (price == 0) {
+      // nada
+    } else if (priceR == 1) {
+      if (price > 10) {
+        passPrice = false;
+      }
+    } else if (priceR == 2) {
+      if (price > 30 || price <= 10) {
+        passPrice = false;
+      }
+    } else if (priceR == 3) {
+      if (price > 60 || price <= 30) {
+        passPrice = false;
+      }
+    } else {
+      if (price < 60) {
+        passPrice = false;
+      }
+    }
+
+    if (diet.isNotEmpty) {
+      for (String d in dietR) {
+        if (diet.contains(d)) {
+          passDiet = true;
+          break;
+        }
+      }
+    } else {
+      passDiet = true;
+    }
+
+    if (styles.isNotEmpty) {
+      for (String d in stylesR) {
+        if (styles.contains(d)) {
+          passStyle = true;
+          break;
+        }
+      }
+    } else {
+      passStyle = true;
+    }
+
+    return passDiet && passStyle && passPrice;
+  }
+
+  void getRestaurantsNew() async {
+    restList = [];
+    await users.doc('${emailTextController.text}').get().then((value) {
+      familar = List.from(value['familar']);
+    });
+    await db.collection("restaurants").get().then(
+      (event) {
+        for (var doc in event.docs) {
+          if (passFiltersNew(doc)) {
+            restList.add(Restaurant.fromFirestore(doc, null));
+          }
+        }
+      },
+      onError: (e) => print("Error getting doc"),
+    );
+  }
+
+  bool passFiltersNew(var doc) {
+    List<String> diet = getActiveDiet();
+    List<String> styles = getActiveStyle();
+    List<String> dietR = List.from(doc.data()['diet']);
+    List<String> stylesR = List.from(doc.data()['styles']);
+    int priceR = doc.data()['price'];
+    String nameR = doc.data()['name'];
+    bool passDiet = false;
+    bool passStyle = false;
+    bool passPrice = true;
+
+    if (familar.contains(nameR)) {
+      return false;
+    }
+
+    if (price == 0) {
+      // nada
+    } else if (priceR == 1) {
+      if (price > 10) {
+        passPrice = false;
+      }
+    } else if (priceR == 2) {
+      if (price > 30 || price <= 10) {
+        passPrice = false;
+      }
+    } else if (priceR == 3) {
+      if (price > 60 || price <= 30) {
+        passPrice = false;
+      }
+    } else {
+      if (price < 60) {
+        passPrice = false;
+      }
+    }
+
+    if (diet.isNotEmpty) {
+      for (String d in dietR) {
+        if (diet.contains(d)) {
+          passDiet = true;
+          break;
+        }
+      }
+    } else {
+      passDiet = true;
+    }
+
+    if (styles.isNotEmpty) {
+      for (String d in stylesR) {
+        if (styles.contains(d)) {
+          passStyle = true;
+          break;
+        }
+      }
+    } else {
+      passStyle = true;
+    }
+
+    return passDiet && passStyle && passPrice;
+  }
 
   List<String> styleOptions = [
     'Breakfast',
@@ -27,10 +187,12 @@ class Globals {
     'Grill',
     'Burgers',
     'Desert',
-    'Salad'
+    'Salad',
+    'Middle-Eastern'
   ];
 
   List<bool> styleSelected = [
+    false,
     false,
     false,
     false,
@@ -112,12 +274,18 @@ class Restaurant {
   final GeoPoint? location;
   final int? price;
 
-  Restaurant({this.name, this.styles, this.diet, this.link, this.location, this.price});
+  Restaurant(
+      {this.name,
+      this.styles,
+      this.diet,
+      this.link,
+      this.location,
+      this.price});
 
   factory Restaurant.fromFirestore(
-      DocumentSnapshot<Map<String, dynamic>> snapshot,
-      SnapshotOptions? options,
-      ) {
+    DocumentSnapshot<Map<String, dynamic>> snapshot,
+    SnapshotOptions? options,
+  ) {
     final data = snapshot.data();
     return Restaurant(
       name: data?['name'],
@@ -129,4 +297,9 @@ class Restaurant {
     );
   }
 
+  @override
+  String toString() {
+    // TODO: implement toString
+    return '${this.name}: \n   diet: ${this.diet}\n   style: ${this.styles}\n   price: ${this.price}\n   link: ${this.link}\n   location: ${this.location}]n';
+  }
 }
