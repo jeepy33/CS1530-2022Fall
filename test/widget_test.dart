@@ -7,6 +7,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:locate_app/constants.dart';
 
 import 'package:locate_app/main.dart';
 
@@ -16,12 +17,41 @@ void main() {
     await tester.pumpWidget(const MyApp());
 
     // Verify that the app name is displayed
-    expect(find.text('LocAte'), findsOneWidget);
+    //expect(find.text('LocAte'), findsOneWidget);
 
     // Tap the 'Sign In' Button
-    await tester.tap(find.widgetWithText(ElevatedButton, "Sign In"));
+    await tester.tap(find.widgetWithText(ElevatedButton, 'Sign In'));
+    await tester.pump();
+    // await tester.pump(new Duration(milliseconds: 500));
+
+    expect(find.text('Sign In'), findsOneWidget);
+  });
+
+  testWidgets('Goes to Sign Up Page', (WidgetTester tester) async {
+    // Build our app and trigger a frame.
+    await tester.pumpWidget(const MyApp());
+
+    // Verify that the app name is displayed
+    //expect(find.text('LocAte'), findsOneWidget);
+
+    // Tap the 'Sign In' Button
+    await tester.tap(find.widgetWithText(ElevatedButton, 'Sign Up'));
     await tester.pump();
 
-    expect(find.text("Sign In"), findsOneWidget);
+    expect(find.text('Sign Up'), findsOneWidget);
   });
+
+  // testWidgets('Goes to Sign Up Page', (WidgetTester tester) async {
+  //   // Build our app and trigger a frame.
+  //   await tester.pumpWidget(const MyApp());
+
+  //   // Verify that the app name is displayed
+  //   //expect(find.text('LocAte'), findsOneWidget);
+
+  //   // Tap the 'Sign In' Button
+  //   await tester.tap(find.widgetWithText(ElevatedButton, "Sign Up"));
+  //   await tester.pump();
+
+  //   expect(find.text("Login"), findsOneWidget);
+  // });
 }
